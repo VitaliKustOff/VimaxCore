@@ -1,29 +1,58 @@
 cmake_minimum_required(VERSION 3.20)
-project(vimax_core VERSION 0.1.0 LANGUAGES CXX)
-option(VIMAX_BUILD_TESTS "Build tests" ON)
-add_library(
-  vimax_core
-    src/modules/echo_module.cpp
+
+project(vimax_core)
+
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+include_directories(
+    include
+)
+
+
+add_library(vimax_core
+
     src/core.cpp
     src/runtime.cpp
+
     src/module_registry.cpp
     src/policy_engine.cpp
     src/audit_log.cpp
+
     src/workflow.cpp
     src/workflow_engine.cpp
+
+    src/modules/echo_module.cpp
+
+    src/console/console.cpp
 )
-target_include_directories(vimax_core PUBLIC include)
-target_compile_features(vimax_core PUBLIC cxx_std_20)
-if(MSVC)
-  target_compile_options(vimax_core PRIVATE /W4 /permissive-)
-else()
-  target_compile_options(vimax_core PRIVATE -Wall -Wextra -Wpedantic)
-endif()
-add_executable(vimax_demo apps/console/main.cpp)
-target_link_libraries(vimax_demo PRIVATE vimax_core)
-if(VIMAX_BUILD_TESTS)
-  enable_testing()
-  add_executable(vimax_tests tests/test_main.cpp)
-  target_link_libraries(vimax_tests PRIVATE vimax_core)
-  add_test(NAME vimax_tests COMMAND vimax_tests)
-endif()
+
+
+add_executable(vimax_demo
+
+    apps/console/main.cpp
+
+)
+
+
+target_link_libraries(vimax_demo
+
+    PRIVATE vimax_core
+
+)
+
+
+add_executable(vimax_tests
+
+    tests/test_main.cpp
+
+)
+
+
+target_link_libraries(vimax_tests
+
+    PRIVATE vimax_core
+
+)
