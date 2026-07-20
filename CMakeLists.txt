@@ -3,6 +3,7 @@ project(vimax_core VERSION 0.1.0 LANGUAGES CXX)
 option(VIMAX_BUILD_TESTS "Build tests" ON)
 add_library(
   vimax_core
+    src/modules/echo_module.cpp
     src/core.cpp
     src/runtime.cpp
     src/module_registry.cpp
@@ -10,7 +11,6 @@ add_library(
     src/audit_log.cpp
     src/workflow.cpp
     src/workflow_engine.cpp
-    src/echo_module.cpp
 )
 target_include_directories(vimax_core PUBLIC include)
 target_compile_features(vimax_core PUBLIC cxx_std_20)

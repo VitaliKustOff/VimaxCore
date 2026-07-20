@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 
 namespace vimax {
@@ -24,6 +25,9 @@ public:
     std::shared_ptr<Module> find(
         const std::string& name
     );
+
+
+    std::vector<std::string> list_modules() const;
 
 
 private:
