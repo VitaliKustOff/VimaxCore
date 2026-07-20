@@ -2,15 +2,15 @@ cmake_minimum_required(VERSION 3.20)
 project(vimax_core VERSION 0.1.0 LANGUAGES CXX)
 option(VIMAX_BUILD_TESTS "Build tests" ON)
 add_library(
-  vimax_core 
+  vimax_core
     src/core.cpp
+    src/runtime.cpp
     src/module_registry.cpp
     src/policy_engine.cpp
     src/audit_log.cpp
-    src/runtime.cpp
-    src/workflow.cpp
     src/workflow.cpp
     src/workflow_engine.cpp
+    src/echo_module.cpp
 )
 target_include_directories(vimax_core PUBLIC include)
 target_compile_features(vimax_core PUBLIC cxx_std_20)
