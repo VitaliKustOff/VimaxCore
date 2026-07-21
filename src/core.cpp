@@ -16,20 +16,13 @@ Core::Core()
 }
 
 
-Core::~Core()
-{
-}
+Core::~Core() = default;
 
 
 void Core::initialize()
 {
     std::cout
-        << "=================================\n"
-        << "        VIMAX CORE 0.1\n"
-        << "=================================\n\n";
-
-
-    std::cout << "[BOOT] Initializing core...\n\n";
+        << "[BOOT] Initializing core...\n\n";
 
 
     moduleRegistry.initialize();
@@ -45,30 +38,40 @@ void Core::initialize()
 
 
     std::cout
-        << "[ OK ] Audit Log\n";
+        << "[ OK ] Audit Log\n\n";
 
 
-    auto echo =
-        std::make_shared<EchoModule>();
-
-
-    moduleRegistry.register_module(echo);
+    moduleRegistry.register_module(
+        std::make_shared<EchoModule>()
+    );
 
 
     std::cout
-        << "\n[MODULES]\n"
-        << "  + "
-        << echo->name()
-        << "\n";
+        << "[MODULES]\n";
+
+
+    for (const auto& name : moduleRegistry.list_modules())
+    {
+        std::cout
+            << " + "
+            << name
+            << "\n";
+    }
 
 
     std::cout
         << "\n[RUNTIME]\n"
-        << "  Status: READY\n\n";
+        << " Status: READY\n\n";
 
 
     std::cout
         << "=================================\n";
+}
+
+
+ModuleRegistry& Core::modules()
+{
+    return moduleRegistry;
 }
 
 

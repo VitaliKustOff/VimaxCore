@@ -3,12 +3,12 @@
 #include "vimax/core/module.hpp"
 
 #include <memory>
-#include <string>
-#include <unordered_map>
 #include <vector>
+#include <string>
 
 
 namespace vimax {
+
 
 class ModuleRegistry
 {
@@ -22,21 +22,14 @@ public:
     );
 
 
-    std::shared_ptr<Module> find(
-        const std::string& name
-    );
-
-
     std::vector<std::string> list_modules() const;
 
 
 private:
 
-    std::unordered_map<
-        std::string,
-        std::shared_ptr<Module>
-    > modules_;
+    std::vector<std::shared_ptr<Module>> modules_;
 
 };
+
 
 }

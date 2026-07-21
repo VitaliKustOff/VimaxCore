@@ -1,10 +1,22 @@
 #include "vimax/core/runtime.hpp"
 
+
 namespace vimax {
+
+
+Runtime::Runtime() = default;
+
 
 void Runtime::start()
 {
-    core.initialize();
+    core_.initialize();
 }
+
+
+Core& Runtime::core()
+{
+    return core_;
+}
+
 
 }
